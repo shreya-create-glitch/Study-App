@@ -1,0 +1,124 @@
+import { GoogleGenAI } from "@google/genai";
+import Markdown from 'react-markdown'
+import React, { useState } from 'react';
+import MonacoEditor from 'react-monaco-editor';
+import Select from 'react-select';
+import { RingLoader } from "react-spinners";
+
+const Debug = () => {
+  const [code, setCode] = useState('// Write your code here');
+
+  const options = {
+    selectOnLineNumbers: true,
+    automaticLayout: true,
+  };
+
+  const option = [
+    { value: 'javascript', label: 'JavaScript' },
+    { value: 'typescript', label: 'TypeScript' },
+    { value: 'python', label: 'Python' },
+    { value: 'java', label: 'Java' },
+    { value: 'c', label: 'C' },
+    { value: 'cpp', label: 'C++' },
+    { value: 'csharp', label: 'C#' },
+    { value: 'go', label: 'Go' },
+    { value: 'ruby', label: 'Ruby' },
+    { value: 'php', label: 'PHP' },
+    { value: 'html', label: 'HTML' },
+    { value: 'css', label: 'CSS' },
+    { value: 'json', label: 'JSON' },
+    { value: 'markdown', label: 'Markdown' },
+    { value: 'sql', label: 'SQL' },
+    { value: 'shell', label: 'Shell' },
+    { value: 'yaml', label: 'YAML' },
+  ];
+
+  const [selectedOption, setselectedOption] = useState(option[0])
+  const [loading, setloading] = useState(false);
+  const [response, setrrsponse] = useState("")
+  const ai = new GoogleGenAI({ apiKey: "AIzaSyDCg_Y4mZIY0A0EhTGyKSR7EOQXDNviQR8" });
+
+  async function reviewCode() {
+    setloading(true)
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: `You are an expert-level software developer, skilled in writing efficient, clean, and advanced code.
+I’m sharing a piece of code written in ${selectedOption.value}.
+Your job is to deeply review this code and provide the following:
+
+1️⃣ A quality rating: Better, Good, Normal, or Bad.
+2️⃣ Detailed suggestions for improvement, including best practices and advanced alternatives.
+3️⃣ A clear explanation of what the code does, step by step.
+4️⃣ A list of any potential bugs or logical errors, if found.
+5️⃣ Identification of syntax errors or runtime errors, if present.
+6️⃣ Solutions and recommendations on how to fix each identified issue.
+
+Analyze it like a senior developer reviewing a pull request.
+
+Code: ${code}
+`,
+    });
+    setloading(false);
+    setrrsponse(response.text)
+  }
+
+  return (
+    <div className="p-4 space-y-4">
+      <div className="flex gap-4 items-center">
+        <div className="w-64">
+          <Select
+            value={selectedOption}
+            onChange={(e) => setselectedOption(e)}
+            options={option}
+          />
+        </div>
+        <button
+          onClick={() => {
+            if (code === "") {
+              alert("pls ent the code first")
+            } else {
+              reviewCode()
+            }
+          }}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+          Review code
+        </button>
+      </div>
+
+      <div className="flex gap-4">
+        <div className="w-1/2 border rounded overflow-hidden">
+          <MonacoEditor
+            width="100%"
+            height="600"
+            language={selectedOption.value}
+            theme="vs-dark"
+            value={code}
+            options={options}
+            onChange={(e) => setCode(e)}
+          />
+        </div>
+
+        <div className="w-1/2 border rounded bg-gray-100 p-4 overflow-y-auto max-h-[600px]">
+          <div className="text-lg font-semibold mb-2">Response</div>
+          {loading && <RingLoader />}
+          <Markdown>{response}</Markdown>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Debug;
+
+
+
+
+
+
+
+
+
+
+
+
