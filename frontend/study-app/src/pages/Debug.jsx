@@ -36,7 +36,7 @@ const Debug = () => {
   const [selectedOption, setselectedOption] = useState(option[0])
   const [loading, setloading] = useState(false);
   const [response, setrrsponse] = useState("")
-  const ai = new GoogleGenAI({ apiKey: "AIzaSyDCg_Y4mZIY0A0EhTGyKSR7EOQXDNviQR8" });
+  const ai = new GoogleGenAI({ apiKey: " " });
 
   async function reviewCode() {
     setloading(true)
@@ -82,7 +82,7 @@ Code: ${code}
           }}
           className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
         >
-          Review code
+          Review code(Api key is sensitive so i have not added it ,debug will happen aft adding it)
         </button>
       </div>
 
