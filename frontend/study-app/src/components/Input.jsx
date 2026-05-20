@@ -18,7 +18,8 @@ e.preventDefault();
 const endpoint=signup?"signup":"login";
     
   try {
-    const res=await axios.post(`http://localhost:1000/user/${endpoint}`,data);
+    // const res=await axios.post(`http://localhost:1000/user/${endpoint}`,data);
+    const res=await axios.post(`https://study-app-4o3j.onrender.com/user/${endpoint}`,data);
     localStorage.setItem("user",JSON.stringify(res.data.user));
     localStorage.setItem("token",res.data.token);
     localStorage.setItem("userId", res.data.user._id); 
