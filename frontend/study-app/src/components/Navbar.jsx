@@ -1,106 +1,220 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
-import DropDown from './DropDown';
-import Input from './Input';
-import { FaSearch } from 'react-icons/fa';
-import { FaBookOpenReader } from 'react-icons/fa6';
-import { VscOpenPreview } from 'react-icons/vsc';
+
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import DropDown from "./DropDown";
+import Input from "./Input";
+
+import { FaSearch } from "react-icons/fa";
+import { FaBookOpenReader } from "react-icons/fa6";
+import { VscOpenPreview } from "react-icons/vsc";
 
 const Navbar = ({ setdark, dark }) => {
+
+  // LOGIN POPUP STATE
   const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState('');
-  const user = JSON.parse(localStorage.getItem('user'));
+
+  // SEARCH STATE
+  const [search, setSearch] = useState("");
+
   const navigate = useNavigate();
 
+  // USER
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  // LOGIN / LOGOUT
   const handleAuth = () => {
+
+    // LOGOUT
     if (user) {
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
-      toast.success('Logged out successfully');
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+
+      toast.success("Logged out successfully");
+
       window.location.reload();
-    } else {
+    }
+
+    // LOGIN POPUP
+    else {
       setOpen(true);
     }
   };
 
+  // SEARCH
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search?query=${search}`);
-    setSearch('');
+
+    if (search.trim()) {
+      navigate(`/search?query=${search}`);
+      setSearch("");
+    }
   };
 
-  const toggleDark = () => setdark(!dark);
+  // DARK MODE
+  const toggleDark = () => {
+    setdark(!dark);
+  };
 
+  // PROTECTED ROUTES
   const protectedLink = (path) => ({
-    to: user ? path : '/',
-    onClick: !user ? () => setOpen(true) : undefined,
+    to: user ? path : "/",
+    onClick: !user
+      ? (e) => {
+          e.preventDefault();
+          setOpen(true);
+        }
+      : undefined,
   });
 
   return (
     <>
-      <nav className="bg-white dark:bg-gray-900 shadow-md border-b border-gray-300 dark:border-gray-700 w-full">
-        <Toaster />
-        <div className="w-full px-4 flex items-center justify-between h-16">
-          {/* Left: Logo */}
-          <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center text-xl font-bold text-blue-600 dark:text-blue-400 space-x-2">
-              <FaBookOpenReader className="text-2xl text-blue-600 dark:text-blue-400" />
-              <span>StudyHub</span>
-            </Link>
-          </div>
+      <nav className="w-full bg-black text-white shadow-md border-b border-gray-700">
 
-          {/* Center: Search */}
-          <form onSubmit={handleSubmit} className="hidden md:flex items-center gap-3 flex-1 justify-center">
-            <label htmlFor="navbar-search" className="sr-only">Search</label>
+        <Toaster />
+
+        {/* TOP ROW */}
+        <div className="flex items-center justify-between px-2 py-3">
+
+          {/* LOGO */}
+          <Link
+            to="/"
+            className="flex items-center gap-1 text-lg sm:text-xl font-bold text-blue-400 shrink-0"
+          >
+            <FaBookOpenReader className="text-xl sm:text-2xl" />
+            <span>StudyHub</span>
+          </Link>
+
+          {/* SEARCH */}
+          <form
+            onSubmit={handleSubmit}
+            className="flex items-center mx-2 flex-1 max-w-[140px] sm:max-w-[220px]"
+          >
             <input
-              id="navbar-search"
               type="text"
               placeholder="Search..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-64 px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 bg-white text-black px-2 py-1 rounded-l-md text-xs sm:text-sm outline-none"
             />
+
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm"
+              className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-r-md"
             >
-              <FaSearch className="text-base" />
+              <FaSearch className="text-xs sm:text-sm" />
             </button>
           </form>
 
-          {/* Right: Links + Auth */}
-          <div className="flex items-center gap-3">
-            <div className="hidden md:flex items-center space-x-6">
-              <Link to="/" className="nav-link">Home</Link>
-              <Link {...protectedLink("/books")} className="nav-link">Books</Link>
-              <Link {...protectedLink("/interview")} className="nav-link">Interview Q</Link>
-              <Link {...protectedLink("/debug")} className="nav-link">
-                <span className="flex items-center gap-1">
-                  <VscOpenPreview size={19} />
-                  AIVue
-                </span>
-              </Link>
-              <Link to="/question" className="nav-link font-semibold text-purple-600 dark:text-purple-400 hover:underline underline-offset-4">
-                Visited
-              </Link>
-            </div>
+          {/* RIGHT SIDE */}
+          <div className="flex items-center gap-2 shrink-0">
 
-            <button onClick={toggleDark} className="text-xl">
-              {dark ? '☀️' : '🌙'}
+            {/* THEME BUTTON */}
+            <button
+              onClick={toggleDark}
+              className="text-lg"
+            >
+              {dark ? "☀️" : "🌙"}
             </button>
 
+            {/* LOGIN / LOGOUT */}
             <button
               onClick={handleAuth}
-              className={`px-3 py-2 rounded-md text-sm text-white ${user ? 'bg-red-500' : 'bg-blue-500'}`}
+              className={`px-2 py-1 rounded-md text-xs sm:text-sm text-white whitespace-nowrap ${
+                user ? "bg-red-500" : "bg-blue-500"
+              }`}
             >
-              {user ? `Logout (${user.email})` : 'Login'}
+              {user ? "Logout" : "Login"}
             </button>
+
           </div>
         </div>
+
+        {/* MOBILE NAVBAR */}
+        <div className="flex md:hidden justify-around items-center py-3 border-t border-gray-700 text-xs sm:text-sm text-white flex-wrap gap-2">
+
+          <Link
+            to="/"
+            className="hover:text-blue-400 transition whitespace-nowrap"
+          >
+            Home
+          </Link>
+
+          <Link
+            {...protectedLink("/books")}
+            className="hover:text-blue-400 transition whitespace-nowrap"
+          >
+            Books
+          </Link>
+
+          <Link
+            {...protectedLink("/interview")}
+            className="hover:text-blue-400 transition whitespace-nowrap"
+          >
+            Interview
+          </Link>
+
+          <Link
+            {...protectedLink("/debug")}
+            className="flex items-center gap-1 hover:text-blue-400 transition whitespace-nowrap"
+          >
+            <VscOpenPreview />
+            AI View
+          </Link>
+
+          <Link
+            to="/question"
+            className="text-purple-400 hover:text-purple-300 transition whitespace-nowrap"
+          >
+            Visited
+          </Link>
+
+        </div>
+
+        {/* DESKTOP NAVBAR */}
+        <div className="hidden md:flex items-center justify-center gap-8 py-3 border-t border-gray-700 text-sm text-white">
+
+          <Link
+            to="/"
+            className="hover:text-blue-400 transition"
+          >
+            Home
+          </Link>
+
+          <Link
+            {...protectedLink("/books")}
+            className="hover:text-blue-400 transition"
+          >
+            Books
+          </Link>
+
+          <Link
+            {...protectedLink("/interview")}
+            className="hover:text-blue-400 transition"
+          >
+            Interview Q
+          </Link>
+
+          <Link
+            {...protectedLink("/debug")}
+            className="flex items-center gap-1 hover:text-blue-400 transition"
+          >
+            <VscOpenPreview />
+            AI View
+          </Link>
+
+          <Link
+            to="/question"
+            className="text-purple-400 hover:text-purple-300 transition"
+          >
+            Visited
+          </Link>
+
+        </div>
+
       </nav>
 
-      {/* Login Popup */}
+      {/* LOGIN POPUP */}
       {open && !user && (
         <DropDown onClose={() => setOpen(false)}>
           <Input onClose={() => setOpen(false)} />
@@ -111,6 +225,3 @@ const Navbar = ({ setdark, dark }) => {
 };
 
 export default Navbar;
-
-
-
