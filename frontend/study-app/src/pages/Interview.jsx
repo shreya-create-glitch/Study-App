@@ -7,7 +7,7 @@ const Interview = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('https://study-app-4o3j.onrender.com/interview')
+    axios.get(' https://study-app-1-u0bd.onrender.com/interview')
       .then(res => setQuestions(res.data))
       .catch(err => console.error('Failed to fetch interview questions:', err));
   }, []);
@@ -25,7 +25,7 @@ const handleChange = async (id) => {
       }
 
       
-      await axios.post(`https://study-app-4o3j.onrender.com/api/interview/visit/${userId}`);
+      await axios.post(` https://study-app-1-u0bd.onrender.com/api/interview/visit/${userId}`);
 
       
       navigate(`/questiondetail/${id}`);

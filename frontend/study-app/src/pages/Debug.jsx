@@ -25,7 +25,7 @@ const Debug = () => {
       setLoading(true);
 
       const response = await axios.post(
-        "http://localhost:1000/review",
+        " https://study-app-1-u0bd.onrender.com/review",
         {
           prompt: prompt,
         }

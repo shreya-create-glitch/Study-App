@@ -7,8 +7,8 @@ const Interview = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // axios.get('http://localhost:1000/interview')
-    axios.get('https://study-app-4o3j.onrender.com/interview')
+    
+    axios.get(' https://study-app-1-u0bd.onrender.com/interview')
       .then(res => {
         const sorted = res.data.sort((a, b) => b._id.localeCompare(a._id));
         setQuestions(sorted.slice(0, 3));

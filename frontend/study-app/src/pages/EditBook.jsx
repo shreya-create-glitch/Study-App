@@ -16,7 +16,7 @@ const EditBook = () => {
 
   const fetchBook = async () => {
     try {
-      const res = await axios.get(`https://study-app-4o3j.onrender.com/book/${id}`);
+      const res = await axios.get(` https://study-app-1-u0bd.onrender.com/book/${id}`);
       setFormData({
         title: res.data.title,
         author: res.data.author,
@@ -42,7 +42,7 @@ const EditBook = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://study-app-4o3j.onrender.com/book/${id}`, formData, {
+      await axios.put(` https://study-app-1-u0bd.onrender.com/book/${id}`, formData, {
         headers: {
           authorization: 'Bearer ' + localStorage.getItem('token')
         }

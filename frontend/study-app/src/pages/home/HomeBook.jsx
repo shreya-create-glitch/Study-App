@@ -7,8 +7,8 @@ const HomeBook = ({dark}) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // axios.get(`http://localhost:1000/book`)
-    axios.get(`https://study-app-4o3j.onrender.com/book`)
+    
+    axios.get(` https://study-app-1-u0bd.onrender.com/book`)
       .then(res => {
         const sorted = res.data.sort((a, b) => b._id.localeCompare(a._id));
         setData(sorted.slice(0, 3));

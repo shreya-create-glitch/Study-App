@@ -11,7 +11,7 @@ const QuestionStatus = () => {
   useEffect(() => {
     const fetchVisitCount = async () => {
       try {
-        const { data } = await axios.get(`https://study-app-4o3j.onrender.com/api/interview/question-status/${userId}`);
+        const { data } = await axios.get(` https://study-app-1-u0bd.onrender.com/api/interview/question-status/${userId}`);
         
         const today = data?.todayCount || 0;
         const yesterday = data?.yesterdayCount || 0;

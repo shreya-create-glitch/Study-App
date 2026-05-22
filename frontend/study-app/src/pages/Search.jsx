@@ -12,7 +12,7 @@ const Search = () => {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const res = await axios.get(`https://study-app-4o3j.onrender.com/book?search=${query}`);
+        const res = await axios.get(` https://study-app-1-u0bd.onrender.com/book?search=${query}`);
         setBook(res.data);
       } catch (error) {
         console.error('Error fetching book results:', error);
@@ -21,7 +21,7 @@ const Search = () => {
 
 const fetchquestions=async()=>{
     try {
-      const res=await axios.get(`https://study-app-4o3j.onrender.com/interview?search=${query}`);
+      const res=await axios.get(` https://study-app-1-u0bd.onrender.com/interview?search=${query}`);
     setquestion(res.data)
     } catch (error) {
     console.error('Error fetching questions results:', error);
