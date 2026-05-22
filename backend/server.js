@@ -14,11 +14,10 @@ connection();
 app.use("/book",require('./routes/book'));
 app.use("/interview",require('./routes/interview'));
 app.use('/user',require('./routes/user'))
-app.use('/api/interview', require('./routes/QuestionVisit'));
+// app.use('/api/interview', require('./routes/QuestionVisit'));
 
-app.get("/", (req, res) => {
-  res.send("Backend is running successfully 🚀");
-});
+app.use('/',require('./routes/ai.routes'))
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

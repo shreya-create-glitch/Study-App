@@ -32,9 +32,10 @@ const App = () => {
             <Route path="/editbook/:id" element={<EditBook></EditBook>}></Route>
             <Route path="/addbook" element={<AddBook></AddBook>}></Route>
             <Route path="/" element={<Home dark={dark} />} />
+            <Route path="/debug" element={<Debug />} />
             <Route path="/books" element={<Books />} />
             <Route path="/interview" element={<Interview />} />
-            <Route path="/debug" element={<Debug />} />
+            
             <Route path="/detail/:id" element={<ShowBook />} />
             <Route path="/questiondetail/:id" element={<ShowInterview />} />
             <Route path="/search" element={<Search></Search>}></Route>
