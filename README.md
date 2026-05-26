@@ -8,7 +8,7 @@ https://study-app-redeployee.vercel.app/debug
 ##GitHub Repository
 https://github.com/shreya-create-glitch/Study-App
 
-# Features
+#Features:
 
 - Study session planning
 - Task and progress tracking
