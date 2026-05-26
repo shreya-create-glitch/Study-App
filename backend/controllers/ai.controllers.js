@@ -10,3 +10,4 @@ module.exports.getResponse = async (req, res)=>{
 
     res.send(response);
 }
+

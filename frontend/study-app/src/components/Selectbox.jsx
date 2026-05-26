@@ -32,7 +32,6 @@ const Selectbox = () => {
       >
         <option value="" disabled>Select:</option>
         <option value="book">Book</option>
-        <option value="library">Library</option>
       </select>
 
       {open && (
