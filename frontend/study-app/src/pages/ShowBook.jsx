@@ -7,7 +7,7 @@ const ShowBook = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(` https://study-app-1-u0bd.onrender.com/book/${id}`)
+    axios.get(`https://study-app-2-82ch.onrender.com/book/${id}`)
       .then((res) => {
         setData(res.data);
       })

@@ -18,7 +18,7 @@ const Book = () => {
   const fetchBooks = async () => {
     try {
       
-      const res=await axios.get(' https://study-app-1-u0bd.onrender.com/book');
+      const res=await axios.get('https://study-app-2-82ch.onrender.com/book');
       setData(res.data);
     } catch (err) {
       console.error("Error fetching books:", err);
@@ -31,7 +31,7 @@ const Book = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(` https://study-app-1-u0bd.onrender.com/book/${id}`, {
+      await axios.delete(`https://study-app-2-82ch.onrender.com/book/${id}`, {
         headers: {
           authorization: 'Bearer ' + localStorage.getItem('token')
         }

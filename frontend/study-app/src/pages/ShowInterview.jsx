@@ -6,7 +6,7 @@ const ShowInterview = () => {
     const [data,setdata]=useState("");
     const {id}=useParams();
     useEffect(()=>{
-     axios.get(` https://study-app-1-u0bd.onrender.com/interview/${id}`).then(res=>{
+     axios.get(`https://study-app-2-82ch.onrender.com/interview/${id}`).then(res=>{
         setdata(res.data);
      }).catch(err=>{
       console.log(err);

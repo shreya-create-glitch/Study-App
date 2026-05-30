@@ -31,7 +31,7 @@ const AddBook = () => {
 
       });
       toast.success("Book added successfully!");
-      navigate("https://study-app-1-u0bd.onrender.com/books");
+      navigate("https://study-app-2-82ch.onrender.com/books");
     } catch (error) {
       toast.error("Failed to add book");
       console.error(error);
