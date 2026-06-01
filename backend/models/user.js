@@ -14,6 +14,15 @@ const userSchema=new mongoose.Schema({
     },
     coverImage:{
        type:String, 
-    }
+    },
+    targetRole: {
+    type: String,
+    default: "SDE",
+  },
+
+  topics: {
+    type: [String], // ["DSA", "DBMS", "Web Dev"]
+    default: ["DSA"],
+  },
 })
 module.exports = mongoose.model('user', userSchema);

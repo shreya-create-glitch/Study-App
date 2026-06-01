@@ -15,6 +15,7 @@ import Search from './pages/Search'
 import EditBook from './pages/EditBook';
 import AddBook from './pages/AddBook';
 import QuestionStatus from './pages/QuestionStatus';
+import DailyQuiz from './pages/DailyQuiz';
 const App = () => {
   const [dark, setdark] = useState(false);
 
@@ -32,7 +33,7 @@ const App = () => {
             <Route path="/debug" element={<Debug />} />
             <Route path="/books" element={<Books />} />
             <Route path="/interview" element={<Interview />} />
-            
+            <Route path="/quiz" element={<DailyQuiz></DailyQuiz>}></Route>
             <Route path="/detail/:id" element={<ShowBook />} />
             <Route path="/questiondetail/:id" element={<ShowInterview />} />
             <Route path="/search" element={<Search></Search>}></Route>

@@ -24,8 +24,9 @@ app.use("/book",require('./routes/book'));
 app.use("/interview",require('./routes/interview'));
 app.use('/user',require('./routes/user'))
 app.use('/api/interview', require('./routes/QuestionVisit'));
+app.use('/quiz',require('./routes/quiz'));
 
-app.use('/',require('./routes/ai.routes'))
+app.use('/',require('./routes/ai.routes'));
 
 // Start the server
 app.listen(PORT, () => {

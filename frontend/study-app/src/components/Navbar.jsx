@@ -203,6 +203,13 @@ const Navbar = ({ setdark, dark }) => {
             Books
           </Link>
 
+           <Link
+  to="/quiz"
+  className="text-green-400 hover:text-green-300 transition whitespace-nowrap"
+>
+  Daily Quiz
+</Link>
+
           <Link
             to="/question"
             className="text-purple-400 hover:text-purple-300 transition"

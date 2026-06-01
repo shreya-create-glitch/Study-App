@@ -1,22 +1,20 @@
-const jwt=require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
-const verifyToken=async(req,res,next)=>{
-    let token=req.headers['authorization']
-    if(token){
-        token=token.split(" ")[1]
-        jwt.verify(token,process.env.SECRET,(err,decoded)=>{
-            if(err){
-                return res.json("Invalid Token")
-            }
-            else{
-                req.user=decoded
-            }
-        })
-        next()
-    }
-    else{
-return res.json("Invalid Token")
+const auth = (req, res, next) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
 
+    if (!token) {
+      return res.status(401).json({ message: "No token" });
     }
-}
-module.exports=verifyToken;
+
+    const decoded = jwt.verify(token, process.env.SECRET);
+    req.user = decoded;
+
+    next();
+  } catch (err) {
+    return res.status(401).json({ message: "Invalid token" });
+  }
+};
+
+module.exports = auth;
