@@ -50,11 +50,18 @@ const addBook = async (req, res) => {
 };
 
 // GET ALL BOOKS
+
+  // GET ALL BOOKS
 const getAllBook = async (req, res) => {
   try {
     const search = req.query.search || "";
 
-    const cacheKey = `books:${search.toLowerCase().trim()}`;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    const skip = (page - 1) * limit;
+
+    const cacheKey = `books:${search.toLowerCase().trim()}:${page}:${limit}`;
 
     // Cache Check
     if (redisClient.isOpen) {
@@ -73,34 +80,60 @@ const getAllBook = async (req, res) => {
     if (search) {
       query = {
         $or: [
-          { title: { $regex: search, $options: "i" } },
-          { author: { $regex: search, $options: "i" } },
+          {
+            title: {
+              $regex: search,
+              $options: "i",
+            },
+          },
+          {
+            author: {
+              $regex: search,
+              $options: "i",
+            },
+          },
         ],
       };
     }
 
-    const allbooks = await bookModel.find(query);
+    const totalBooks = await bookModel.countDocuments(query);
+
+    const books = await bookModel
+      .find(query)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    const response = {
+      books,
+      currentPage: page,
+      totalPages: Math.ceil(totalBooks / limit),
+      totalBooks,
+      hasNextPage: page < Math.ceil(totalBooks / limit),
+      hasPrevPage: page > 1,
+    };
 
     // Save Cache
     if (redisClient.isOpen) {
       await redisClient.set(
         cacheKey,
-        JSON.stringify(allbooks),
+        JSON.stringify(response),
         {
-          EX: 60 * 10, // 10 min
+          EX: 60 * 10,
         }
       );
     }
 
-    res.json(allbooks);
+    res.json(response);
 
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      error: "Failed to fetch books"
+      error: "Failed to fetch books",
     });
   }
-};
+};    
+    
 
 // GET BOOK BY ID
 const getById = async (req, res) => {
