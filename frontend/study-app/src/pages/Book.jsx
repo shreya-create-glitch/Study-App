@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MdAutoDelete } from "react-icons/md";
@@ -8,18 +7,21 @@ import toast from 'react-hot-toast';
 
 const Book = () => {
   const [data, setData] = useState([]);
+  const [page,setPage]=useState(1);
+  const [totalPages,setTotalPages]=useState(1);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user')); 
 
   useEffect(() => {
     fetchBooks();
-  }, []);
+  }, [page]);
 
   const fetchBooks = async () => {
     try {
       
-      const res=await axios.get('https://study-app-2-82ch.onrender.com/book');
-      setData(res.data);
+      const res=await axios.get('https://study-app-2-82ch.onrender.com/book?page=${page}&limit=3');
+      setData(res.data.books);
+      setTotalPages(res.data.totalPages);
     } catch (err) {
       console.error("Error fetching books:", err);
     }
@@ -84,3 +86,5 @@ const Book = () => {
 };
 
 export default Book;
+
+
