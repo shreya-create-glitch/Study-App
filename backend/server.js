@@ -38,7 +38,7 @@ app.use(
 
 // ---------------- DB Connection ----------------
 connection()
-  .then(() => console.log("✅ DB Connected"))
+  .then(() => console.log(" DB Connected"))
   .catch((err) => console.log("❌ DB Error:", err));
 
 // ---------------- Redis (optional) ----------------
@@ -56,10 +56,10 @@ app.use("/", require("./routes/ai.routes"));
 
 // ---------------- Health Check ----------------
 app.get("/", (req, res) => {
-  res.send("🚀 Backend is running successfully");
+  res.send(" Backend is running successfully");
 });
 
 // ---------------- Start Server ----------------
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(` Server running on port ${PORT}`);
 });

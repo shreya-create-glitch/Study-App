@@ -20,11 +20,25 @@ import DailyQuiz from './pages/DailyQuiz';
 const App = () => {
   const [dark, setdark] = useState(false);
 
-useEffect(()=>{
-  ReactGA.initialize("G-TQRNPE0ZBZ");
-  ReactGA.send({ hitType: "pageview", page:window.location.pathname, title: "app.jsx" });
+// useEffect(()=>{
+//   ReactGA.initialize("G-TQRNPE0ZBZ");
+//   ReactGA.send({ hitType: "pageview", page:window.location.pathname, title: "app.jsx" });
 
-},[])
+
+// },[])
+
+useEffect(() => {
+  console.log("GA initialized");
+
+  ReactGA.initialize("G-TQRNPE0ZBZ");
+
+  ReactGA.send({
+    hitType: "pageview",
+    page: window.location.pathname,
+    title: "app.jsx"
+  });
+}, []);
+
   return (
     <div className={`flex flex-col min-h-screen transition-colors duration-300 ${dark ? "bg-black text-white" : "bg-white text-black"}`}>
       <BrowserRouter>
