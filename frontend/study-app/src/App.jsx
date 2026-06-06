@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import ReactGA from "react-ga4";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Pages
@@ -19,6 +20,11 @@ import DailyQuiz from './pages/DailyQuiz';
 const App = () => {
   const [dark, setdark] = useState(false);
 
+useEffect(()=>{
+  ReactGA.initialize("G-TQRNPE0ZBZ");
+  ReactGA.send({ hitType: "pageview", page:window.location.pathname, title: "app.jsx" });
+
+},[])
   return (
     <div className={`flex flex-col min-h-screen transition-colors duration-300 ${dark ? "bg-black text-white" : "bg-white text-black"}`}>
       <BrowserRouter>
