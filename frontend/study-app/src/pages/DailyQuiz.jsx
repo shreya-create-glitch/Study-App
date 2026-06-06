@@ -13,7 +13,7 @@ const DailyQuiz = () => {
   const fetchQuiz = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:1000/quiz/today",
+        "https://study-app-1-u0bd.onrender.com/quiz/today",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ const DailyQuiz = () => {
   const submitQuiz = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:1000/quiz/submit",
+        "https://study-app-1-u0bd.onrender.com/quiz/submit",
         {
           quizId: quiz._id,
           answer: selected,
