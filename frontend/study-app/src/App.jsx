@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactGA from "react-ga4";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 
 // Pages
 import Home from './pages/Home';
@@ -62,6 +63,7 @@ useEffect(() => {
 
         <Footer />
       </BrowserRouter>
+      <Analytics />
     </div>
   );
 };
