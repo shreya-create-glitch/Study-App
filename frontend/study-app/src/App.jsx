@@ -20,12 +20,7 @@ import DailyQuiz from './pages/DailyQuiz';
 const App = () => {
   const [dark, setdark] = useState(false);
 
-// useEffect(()=>{
-//   ReactGA.initialize("G-TQRNPE0ZBZ");
-//   ReactGA.send({ hitType: "pageview", page:window.location.pathname, title: "app.jsx" });
 
-
-// },[])
 
 useEffect(() => {
   console.log("GA initialized");

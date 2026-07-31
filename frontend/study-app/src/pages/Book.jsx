@@ -40,7 +40,7 @@ const Book = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://study-app-1-u0bd.onrender.com/book/${id}`,
+        `https://study-app-2-82ch.onrender.com/book/${id}`,
         {
           headers: {
             authorization: 'Bearer ' + localStorage.getItem('token')

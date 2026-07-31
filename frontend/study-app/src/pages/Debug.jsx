@@ -37,7 +37,7 @@ const Debug = () => {
 
       console.log(error);
 
-      setReview("❌ Failed to review code.");
+      setReview("Failed to review code.");
 
     } finally {
 

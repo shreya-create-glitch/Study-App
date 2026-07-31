@@ -13,7 +13,8 @@ const DailyQuiz = () => {
   const fetchQuiz = async () => {
     try {
       const res = await axios.get(
-        "https://study-app-1-u0bd.onrender.com/quiz/today",
+       "https://study-app-2-82ch.onrender.com/quiz/today",
+        
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -77,13 +78,11 @@ const DailyQuiz = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
 
       <div className="w-full max-w-xl bg-white shadow-xl rounded-2xl p-6">
-
-        {/* TITLE */}
         <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
            Daily Quiz
         </h1>
 
-        {/* RESULT */}
+       
         {result ? (
           <div className="text-center space-y-3">
             <h2 className="text-xl font-semibold">
@@ -121,7 +120,7 @@ const DailyQuiz = () => {
               ))}
             </div>
 
-            {/* SUBMIT */}
+           
             <button
               onClick={submitQuiz}
               disabled={!selected}
