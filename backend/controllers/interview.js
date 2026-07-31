@@ -1,14 +1,6 @@
 const Interview = require('../models/interview');
 
-// GET all interview questions
-// const getAllQuestions = async (req, res) => {
-//   try {
-//     const questions = await Interview.find();
-//     res.json(questions);
-//   } catch (err) {
-//     res.status(500).json({ error: 'Server error' });
-//   }
-// };
+
 
 const getAllQuestions=async(req,res)=>{
   try {
