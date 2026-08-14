@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactGA from "react-ga4";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import Sidebar from './pages/sidebar';
 // Pages
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
@@ -36,7 +36,7 @@ useEffect(() => {
 
   return (
     <div className={`flex flex-col min-h-screen transition-colors duration-300 ${dark ? "bg-black text-white" : "bg-white text-black"}`}>
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Navbar setdark={setdark} dark={dark} />
 
         <main className="flex-grow">
@@ -56,7 +56,38 @@ useEffect(() => {
         </main>
 
         <Footer />
-      </BrowserRouter>
+      </BrowserRouter> */}
+
+
+      <BrowserRouter>
+  <div className="flex min-h-screen">
+
+    <Sidebar />
+
+    <div className="flex flex-col flex-1">
+      <Navbar setdark={setdark} dark={dark} />
+
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home dark={dark} />} />
+          <Route path="/debug" element={<Debug />} />
+          <Route path="/books" element={<Books />} />
+          <Route path="/interview" element={<Interview />} />
+          <Route path="/quiz" element={<DailyQuiz />} />
+          <Route path="/question" element={<QuestionStatus />} />
+          <Route path="/detail/:id" element={<ShowBook />} />
+          <Route path="/questiondetail/:id" element={<ShowInterview />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/editbook/:id" element={<EditBook />} />
+          <Route path="/addbook" element={<AddBook />} />
+        </Routes>
+      </main>
+
+      <Footer />
+    </div>
+
+  </div>
+</BrowserRouter>
     </div>
   );
 };
