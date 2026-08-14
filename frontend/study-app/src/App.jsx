@@ -36,29 +36,7 @@ useEffect(() => {
 
   return (
     <div className={`flex flex-col min-h-screen transition-colors duration-300 ${dark ? "bg-black text-white" : "bg-white text-black"}`}>
-      {/* <BrowserRouter>
-        <Navbar setdark={setdark} dark={dark} />
-
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/question" element={<QuestionStatus></QuestionStatus>}></Route>
-            <Route path="/editbook/:id" element={<EditBook></EditBook>}></Route>
-            <Route path="/addbook" element={<AddBook></AddBook>}></Route>
-            <Route path="/" element={<Home dark={dark} />} />
-            <Route path="/debug" element={<Debug />} />
-            <Route path="/books" element={<Books />} />
-            <Route path="/interview" element={<Interview />} />
-            <Route path="/quiz" element={<DailyQuiz></DailyQuiz>}></Route>
-            <Route path="/detail/:id" element={<ShowBook />} />
-            <Route path="/questiondetail/:id" element={<ShowInterview />} />
-            <Route path="/search" element={<Search></Search>}></Route>
-          </Routes>
-        </main>
-
-        <Footer />
-      </BrowserRouter> */}
-
-
+     
       <BrowserRouter>
   <div className="flex min-h-screen">
 
